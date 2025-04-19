@@ -41,7 +41,7 @@ public class DrinkOrderServlet extends HttpServlet{
 		req.setAttribute("drinkOrder", drinkOrder);
 		rd.forward(req, resp);
 			
-		
+		//github測試 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		
 	}
 	
