@@ -8,32 +8,41 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.CoffeeOrder;
+import model.DrinkOrder;
 
-@WebServlet("/coffeeOrder")
-public class CoffeeOrderServlet extends HttpServlet {
+@WebServlet("/drinkOrder")
+public class DrinkOrderServlet extends HttpServlet{
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
 		// 設定編碼
 		resp.setCharacterEncoding("UTF-8");
 		resp.setContentType("text/html;charset=UTF-8");
-		// 取得參"
+		
+		// 取得參數
 		String type = req.getParameter("type");
 		String size = req.getParameter("size");
-		String sugar = req.getParameter("sugar");
-		// 判斷參數
-		if(type == null || size == null || sugar == null) {
-			resp.getWriter().print("參數輸入不正確");
+		String iceMessge = req.getParameter("ice");
+		
+		// 判斷參數是否為空
+		if(type == null || size == null || iceMessge == null) {
+			resp.getWriter().print("參數輸入錯誤 ! ");
 			return;
 		}
-		// 進行商業邏輯
-		CoffeeOrder coffeeOrder = new CoffeeOrder(type, size, sugar);
-		//resp.getWriter().print(coffeeOrder.getInfo());
-		// 建立分派器
-		RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/coffee_order.jsp");
-		req.setAttribute("coffeeOrder", coffeeOrder);
+		
+		
+		
+		//根據參數 創建DrinkOrder物件 !
+		DrinkOrder drinkOrder = new DrinkOrder(type, size, iceMessge);
+		
+		//建立分派器
+		RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/drink_order.jsp");
+		req.setAttribute("drinkOrder", drinkOrder);
 		rd.forward(req, resp);
+			
+		
+		
 	}
 	
 }
