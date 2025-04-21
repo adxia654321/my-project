@@ -11,7 +11,7 @@
 	<body style="padding: 20px">
 		<div>
 			<h2>使用者資料表單</h2>
-			<form class="pure-form" method="POST" action"/JavaWeb/user">
+			<form class="pure-form" method="POST" action="/JavaWeb/user">
 				<fieldset>
 					<legend>User Form</legend>
 					<label>姓名:</label>

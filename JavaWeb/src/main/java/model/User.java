@@ -7,6 +7,7 @@ public class User {
 	private Double height;   // from 表單欄位
 	private Double weight;   // from 表單欄位
 	private Double bmiValue; // 自建欄位
+	private String bmiResult;
 	
 	// 建構子封裝
 	public User(String username, String gender, String age, String height, String weight) {
@@ -17,6 +18,25 @@ public class User {
 		this.weight = Double.parseDouble(weight);
 		// 計算 bmi 值
 		this.bmiValue = this.weight / Math.pow(this.height/100, 2);
+		
+		setBmiResult();
+		
+	}
+	
+	public void setBmiResult() {
+		if (gender.equals("male")) {
+			this.bmiResult = (bmiValue < 16)? "過瘦" :
+					   		 (bmiValue < 22)? "正常" :
+						   				      "過胖" ;
+		}else {
+			this.bmiResult = (bmiValue < 16)? "過瘦" :
+				   	   		 (bmiValue < 25)? "正常" :
+					   				          "過胖" ;
+		}
+	}
+	
+	public String getBmiResult() {
+		return bmiResult;
 	}
 	
 	// 方法封裝-getter
