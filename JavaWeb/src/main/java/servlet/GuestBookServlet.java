@@ -1,0 +1,52 @@
+package servlet;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
+
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import model.Guestbook;
+
+@WebServlet("/guestbook")
+public class GuestBookServlet extends HttpServlet{
+
+	private static final List<Guestbook> guestbooks = new CopyOnWriteArrayList<>();
+
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.getRequestDispatcher("WEB-INF/guestbook_form.jsp").forward(req, resp);
+	}
+
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String message = req.getParameter("message");  // 取得表單中留言的內容
+		
+		// 建立guestbook物件
+		Guestbook gb = new Guestbook(message);
+		
+		// 加入到guestbooks 集合中
+		guestbooks.add(gb);
+		
+		// 重導到 /WEB-INF/guestbool_result.jsp
+		RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/guestbook_result.jsp");
+		req.setAttribute("message",message );       // 本次留言
+		req.setAttribute("guestbooks",guestbooks);  // 歷史留言
+		rd.forward(req, resp);
+		
+		
+	}
+	
+
+	
+	
+	
+	
+	
+	
+	
+}
