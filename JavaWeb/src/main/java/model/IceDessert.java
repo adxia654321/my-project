@@ -32,9 +32,9 @@ public class IceDessert {
 		totle += priceTable.get(mainMeal);
 		
 		// 判斷有沒有點配料
-				if(toppings == null) {
-					return totle;
-				}
+		if(toppings == null) {
+			return totle;
+		}
 		
 		//使用forEach 把點的配料 一個一個拿出來比對 再把金額加進去
 		for (String topping : toppings) { 
