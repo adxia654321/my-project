@@ -39,7 +39,7 @@
 								<td>${ gb.message }</td>
 								<!-- 格式化日期 -->
 								<td>
-									<fmt:formatDate value="${gb.date }" pattern="yyyy-MM-dd a hh:mm:ss E"/>
+									<fmt:formatDate value="${gb.date }" pattern="yyyy-MM-dd" a hh:mm:ss E"/>
 								</td>
 							</tr>
 						</c:forEach>
