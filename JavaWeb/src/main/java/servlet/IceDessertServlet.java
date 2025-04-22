@@ -1,6 +1,8 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -8,13 +10,13 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.IceDessert;
+import model.IceOrder;
 
 // 冰果店
 @WebServlet("/ice")
 public class IceDessertServlet extends HttpServlet {
-
-
+	
+	private static List<IceOrder> iceOrders = new CopyOnWriteArrayList<>();
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.getRequestDispatcher("/WEB-INF/ice_dessert_form.jsp").forward(req, resp);
@@ -22,14 +24,17 @@ public class IceDessertServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-		String mainMeal = req.getParameter("mainDish");
-		String[] toppings = req.getParameterValues("toppings");
-		
-		IceDessert iceDessert = new IceDessert(mainMeal, toppings);
-		
-		RequestDispatcher rd = req.getRequestDispatcher("WEB-INF/ice_dessert_result.jsp");
-		req.setAttribute("iceDessert", iceDessert);
+		req.setCharacterEncoding("UTF-8");
+		// 接收表單參數
+		String mainDishName = req.getParameter("mainDish");
+		String[] toppingArray = req.getParameterValues("toppings");
+		// 建立 IceOrder
+		IceOrder iceOrder = new IceOrder(mainDishName, toppingArray);
+		// 加入到訂單集合
+		iceOrders.add(iceOrder);
+		// 重導到 jsp
+		RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/ice_dessert_result.jsp");
+		req.setAttribute("iceOrders", iceOrders);
 		rd.forward(req, resp);
 	}
 	
