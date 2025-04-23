@@ -4,6 +4,7 @@
   <artifactId>JavaWebOrder</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
+
   <dependencies>
 
 
@@ -19,6 +20,13 @@
     <artifactId>jakarta.servlet.jsp.jstl</artifactId>
     <version>3.0.0</version>
   </dependency>
+  
+  <!-- Lombok-->
+  <dependency>
+    <groupId>org.projectlombok</groupId>
+    <artifactId>lombok</artifactId>
+    <version>1.18.38</version>
+</dependency>
  	
 </dependencies>
   <build>
