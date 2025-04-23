@@ -32,9 +32,10 @@
 						</c:forEach>
 					</tbody>
 					<tfoot>
-						<tr>
-							<td colspan="2" style="text-align: right;background-color: #DDDDDD">總金額</td>
-							<td>${ totalPrice }</td>
+						<tr style="background-color: #DDDDDD">
+							<td></td>
+							<td style="text-align: right;"> 總金額: ${ totalPrice } 元</td>
+							<td></td>
 						</tr>
 					</tfoot>
 				</table>
