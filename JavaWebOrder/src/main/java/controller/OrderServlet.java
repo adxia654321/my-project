@@ -11,11 +11,13 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.dto.OrderDTO;
 import service.OrderService;
+import service.ProductService;
 
 @WebServlet("/order")
 public class OrderServlet extends HttpServlet {
 	
 	private OrderService orderService = new OrderService();
+	private ProductService productService = new ProductService();
 	
 	// 查看歷史資料
 	@Override
@@ -23,7 +25,9 @@ public class OrderServlet extends HttpServlet {
 		// 得到歷史紀錄
 		List<OrderDTO> orderDTOs = orderService.getOrderHistory();
 		// 計算總金額
-		int totalPrice = orderDTOs.size() * 100;
+		int totalPrice = orderDTOs.stream()
+								  .mapToInt(dto -> productService.getPrice(dto.getMessage()))
+								  .sum();
 		// 重導到指定 jsp 並帶上歷史紀錄資料
 		RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/history.jsp");
 		req.setAttribute("orderDTOs", orderDTOs);

@@ -4,18 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dao.OrderDAO;
+import dao.ProductDAO;
 import model.dto.OrderDTO;
 import model.entity.Order;
 
 public class OrderService {
 	private OrderDAO orderDAO = new OrderDAO();
+	private ProductDAO productDAO = new ProductDAO();
+
 	
 	// 根據訂單項目(item)新增一筆訂單並回傳訂單顯示資訊(OrderDTO)
 	public OrderDTO addOrder(String item) {
 		// 1: 根據訂單項目(item)新增一筆訂單
 		Order order = new Order();
 		order.setItem(item);
-		order.setPrice(100); // 價格一律 100 元
+		order.setPrice(productDAO.getProduct(item).getPrice()); // 價格設定
 		// 傳給 orderDAO 儲存訂單
 		orderDAO.save(order);
 		//-------------------------------------
@@ -41,7 +44,7 @@ public class OrderService {
 	}
 	
 	
-	// 刪除一筆訂單根據 index
+		// 刪除一筆訂單根據 index
 		public OrderDTO removeOrder(String index) {
 			return removeOrder(Integer.parseInt(index));
 		}
@@ -49,9 +52,25 @@ public class OrderService {
 		// 刪除一筆訂單根據 index
 		public OrderDTO removeOrder(int index) {
 		orderDAO.remove(index);
+		// 回報結果
 		OrderDTO orderDTO = new OrderDTO();
 		orderDTO.setMessage("index=" + index + ". 刪除成功");
 		return orderDTO;
 	}
+		
+		// 修改單筆資料
+		public OrderDTO updateOrder(int index, String newItem) {
+			Order order = orderDAO.getOrder(index);
+			order.setItem(newItem);
+			order.setPrice(productDAO.getProduct(newItem).getPrice());
+			orderDAO.update(index, order);
+			// 回報結果
+			OrderDTO orderDTO = new OrderDTO();
+			orderDTO.setMessage("index=" + index + ". 修改成功");
+			return orderDTO;
+		}
+		
+	
+		
 	
 }
