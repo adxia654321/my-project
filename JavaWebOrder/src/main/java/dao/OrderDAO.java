@@ -21,6 +21,11 @@ public class OrderDAO {
 	public List<Order> findAll(){
 		return orders;
 	}
+	
+	// 刪除一筆資訊
+	public void remove(int index) {
+		orders.remove(index);
+	}
 
 	
 	
