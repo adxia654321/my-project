@@ -13,7 +13,6 @@ public class BaseDao {
     String password = "abc123";
     String dbUrl = "jdbc:mysql://localhost:3306/cart?serverTimezone=Asia/Taipei&characterEncoding=utf-8&useUnicode=true&useSSL=false";
 
-
     // 建立連線
     try {
       Class.forName("com.mysql.cj.jdbc.Driver"); // 註冊 MySQL Driver

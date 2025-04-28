@@ -6,6 +6,6 @@ import cart.model.dto.UserDTO;
 
 public interface UserListService {
 
-	List<UserDTO> findAllUser();
+	List<UserDTO> findAllUsers();
 	
 }
