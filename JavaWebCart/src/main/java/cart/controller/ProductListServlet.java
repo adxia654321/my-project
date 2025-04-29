@@ -7,17 +7,15 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
-@WebServlet("/user/logout")
-public class UserLogoutServlet extends HttpServlet{
-
+@WebServlet("/product/list")
+public class ProductListServlet extends HttpServlet {
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		HttpSession session = req.getSession();
-		session.invalidate(); // 將存放在 session的資料全部失效
+		// 取得所有商品
+		req.getRequestDispatcher("/WEB-INF/view/cart/product_list.jsp").forward(req, resp);
 		
-		req.getRequestDispatcher("/WEB-INF/view/cart/index.jsp").forward(req, resp);
 	}
-
+	
 }
