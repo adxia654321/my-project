@@ -16,5 +16,5 @@ public class ProductDTO {
 	private Integer qty;
 	private String imageBase64;
 	// 自定義欄位 totle (庫存成本: price * qty)
-	private Integer totle;
+	private Integer Total;
 }
