@@ -1,14 +1,18 @@
 package cart.model.dto;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
-import cart.model.entity.OrderItem;
+import lombok.Data;
 
+
+@Data
 public class OrderDTO {
 
 	private Integer orderId;
 	private Integer userId;
-	private List<OrderItem> items = new ArrayList<OrderItem>();
+	private Date orderDate;
+	private List<OrderItemDTO> items = new ArrayList<>();
 
 }
